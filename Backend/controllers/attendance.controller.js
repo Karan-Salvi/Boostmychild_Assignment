@@ -80,12 +80,15 @@ const saveBulkAttendance = catchAsyncErrors(async (req, res) => {
     if (!date || !records)
       return res.status(400).json({ message: "Date & records required" });
 
+    // Normalize date to YYYY-MM-DD ALWAYS
+    const normalizedDate = date;
+
     const bulkOps = records.map((r) => ({
       updateOne: {
-        filter: { userId: r.userId, date },
+        filter: { userId: r.userId, date: normalizedDate }, // FIXED
         update: {
           userId: r.userId,
-          date,
+          date: normalizedDate,
           status: r.status,
           remark: r.remark,
         },

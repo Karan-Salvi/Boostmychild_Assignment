@@ -5,7 +5,12 @@ import {
   useSaveBulkAttendanceMutation,
 } from "../store/api/attendanceApi";
 
-const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
+const Attendance = ({
+  openModal,
+  setOpenModal,
+  selectedDate,
+  refetchAttendance,
+}) => {
   const [fetchAttendance, setFetchAttendance] = useState(false);
   const { data, isLoading, isError } = useGetUsersQuery();
   const { data: attendanceData, isLoading: attendanceLoading } =
@@ -18,7 +23,6 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
   const [saveBulkAttendance, { isLoading: saving }] =
     useSaveBulkAttendanceMutation();
 
-  // Store attendance for each user
   const [attendance, setAttendance] = useState({});
 
   const [editingRemark, setEditingRemark] = useState(null);
@@ -43,7 +47,7 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
     setFetchAttendance(false);
 
     const payload = {
-      date: selectedDate, // "2025-11-25"
+      date: selectedDate,
       records: data.users.map((u) => ({
         userId: u._id,
         status: attendance[u._id]?.status || "present",
@@ -55,6 +59,8 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
 
     try {
       await saveBulkAttendance(payload).unwrap();
+      refetchAttendance();
+      console.log("Attendance saved successfully");
     } catch (err) {
       console.error("Save Error:", err);
     }
@@ -62,7 +68,6 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
 
   useEffect(() => {
     if (attendanceData?.records) {
-      // Build state from backend
       const obj = {};
       attendanceData.records.forEach((rec) => {
         obj[rec.userId._id] = {
@@ -75,9 +80,7 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
 
       setAttendance(obj);
       console.log("Loaded Attendance from backend:", obj);
-      // setFetchAttendance(false); // BONUS → stops refresh mode automatically
     } else if (fetchAttendance) {
-      // Reset only when Refresh is clicked & backend has no data
       setAttendance({});
     }
   }, [attendanceData, fetchAttendance]);
@@ -88,7 +91,6 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/40 p-4">
           <div className="relative w-full max-w-2xl">
             <div className="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-              {/* Modal Header */}
               <div className="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                 <h3 className="text-lg font-medium text-heading">
                   Mark Attendance for {selectedDate.split("-")[2]}
@@ -96,10 +98,9 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
 
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-4 w-full">
-                    {/* SAVE ATTENDANCE BUTTON */}
                     <button
                       type="button"
-                      onClick={handleSave} // <-- ADDED
+                      onClick={handleSave}
                       className="text-white bg-brand hover:bg-brand-strong border border-transparent shadow-xs rounded-base text-sm px-4 py-2.5 cursor-pointer flex items-center gap-1"
                     >
                       <svg
@@ -158,7 +159,6 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
                     </button>
                   </div>
 
-                  {/* Close Button */}
                   <button
                     type="button"
                     onClick={() => setOpenModal(false)}
@@ -182,7 +182,6 @@ const Attendance = ({ openModal, setOpenModal, selectedDate }) => {
                 </div>
               </div>
 
-              {/* Modal Body */}
               <div className="space-y-4 md:space-y-6 py-4 md:py-6">
                 <div className="relative overflow-x-auto bg-neutral-primary shadow-xs rounded-base border border-default">
                   <table className="w-full text-sm text-left rtl:text-right text-body">
