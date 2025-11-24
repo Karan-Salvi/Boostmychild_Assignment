@@ -12,6 +12,18 @@ You can view the live deployed version of the project here:
 
 ---
 
+## !!! Important Note About Backend Response Time
+
+The backend is deployed on **Render's free tier**, which means:
+
+* The server **goes to sleep** if there is no activity for some time.
+* The **first request may take 10–20 seconds** to wake up.
+* After waking up, all requests work normally and quickly.
+
+This delay is **not an issue in the code or the backend**, but simply a limitation of free hosting.
+
+---
+
 ## Application Preview
 
 ### Main Page
