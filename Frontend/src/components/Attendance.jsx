@@ -107,12 +107,12 @@ const Attendance = ({
                       className="text-white bg-brand hover:bg-brand-strong border border-transparent shadow-xs rounded-base text-sm px-4 py-2.5 cursor-pointer flex items-center gap-1"
                     >
                       {saving ? (
-                        <div className="flex items-center justify-center gap-2 min-w-36">
+                        <div className="flex items-center justify-center gap-2 md:min-w-36">
                           <Loader className="w-5 h-5" message="Saving" />
                           <span className="hidden md:block">Saving ...</span>
                         </div>
                       ) : (
-                        <div className="flex items-center justify-center gap-2 min-w-36">
+                        <div className="flex items-center justify-center gap-2 md:min-w-36">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
