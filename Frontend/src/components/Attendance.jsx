@@ -4,6 +4,7 @@ import {
   useGetAttendanceByDateQuery,
   useSaveBulkAttendanceMutation,
 } from "../store/api/attendanceApi";
+import Loader from "./Loader";
 
 const Attendance = ({
   openModal,
@@ -105,19 +106,30 @@ const Attendance = ({
                       onClick={handleSave}
                       className="text-white bg-brand hover:bg-brand-strong border border-transparent shadow-xs rounded-base text-sm px-4 py-2.5 cursor-pointer flex items-center gap-1"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          fill="#fafafa"
-                          d="M3 5a2 2 0 0 1 2-2h8.379a2 2 0 0 1 1.414.586l1.621 1.621A2 2 0 0 1 17 6.621V15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm2-1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1v-4.5A1.5 1.5 0 0 1 6.5 10h7a1.5 1.5 0 0 1 1.5 1.5V16a1 1 0 0 0 1-1V6.621a1 1 0 0 0-.293-.707l-1.621-1.621A1 1 0 0 0 13.379 4H13v2.5A1.5 1.5 0 0 1 11.5 8h-4A1.5 1.5 0 0 1 6 6.5V4H5Zm2 0v2.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5V4H7Zm7 12v-4.5a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5V16h8Z"
-                        />
-                      </svg>
-                      <span className="hidden md:block">Save Attendance</span>
+                      {saving ? (
+                        <div className="flex items-center justify-center gap-2 min-w-36">
+                          <Loader className="w-5 h-5" message="Saving" />
+                          <span className="hidden md:block">Saving ...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center gap-2 min-w-36">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              fill="#fafafa"
+                              d="M3 5a2 2 0 0 1 2-2h8.379a2 2 0 0 1 1.414.586l1.621 1.621A2 2 0 0 1 17 6.621V15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm2-1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1v-4.5A1.5 1.5 0 0 1 6.5 10h7a1.5 1.5 0 0 1 1.5 1.5V16a1 1 0 0 0 1-1V6.621a1 1 0 0 0-.293-.707l-1.621-1.621A1 1 0 0 0 13.379 4H13v2.5A1.5 1.5 0 0 1 11.5 8h-4A1.5 1.5 0 0 1 6 6.5V4H5Zm2 0v2.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5V4H7Zm7 12v-4.5a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5V16h8Z"
+                            />
+                          </svg>
+                          <span className="hidden md:block">
+                            Save Attendance
+                          </span>
+                        </div>
+                      )}
                     </button>
 
                     <button
