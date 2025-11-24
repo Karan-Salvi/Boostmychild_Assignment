@@ -68,7 +68,7 @@ th {
   display: flex !important;
   justify-content: left !important;
   align-items: top !important;
-  min-height: 5.6rem !important;
+  min-height: 5.9rem !important;
   border-radius: 0.35rem !important;
   margin: 2px !important;
   cursor: pointer;
@@ -218,5 +218,9 @@ th {
 
   .fc-toolbar-chunk {
     gap: 0px !important;
+  }
+
+  .fc-daygrid-day-frame {
+    min-height: 5.6rem !important;
   }
 }

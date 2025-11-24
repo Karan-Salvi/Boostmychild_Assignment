@@ -20,8 +20,8 @@ const DateButton = () => {
     >
       <span className="hidden sm:inline text-gray-800">{fullFormat}</span>
 
-      <span className="sm:hidden text-gray-800">{mobileFormat}</span>
-      <Calendar className="w-5 h-5 text-blue-500 ml-2" />
+      <span className="text-xs font-bold sm:hidden text-gray-800 text-nowrap">{mobileFormat}</span>
+      <Calendar className="hidden sm:inline w-5 h-5 text-blue-500 ml-2" />
     </button>
   );
 };
