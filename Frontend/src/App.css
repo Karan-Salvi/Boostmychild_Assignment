@@ -62,12 +62,13 @@ th {
 .fc-daygrid-day-frame {
   background: #f1f5f9;
   border-radius: 10px;
-  padding: 6px;
+  padding-left: 4px !important;
+  padding-top: 2px !important;
   margin: 4px;
   display: flex !important;
   justify-content: left !important;
   align-items: top !important;
-  min-height: 6rem !important;
+  min-height: 5.6rem !important;
   border-radius: 0.35rem !important;
   margin: 2px !important;
   cursor: pointer;

@@ -62,15 +62,14 @@ const Calender = () => {
         width: 100%;
         height: 100%;
         background: transparent;
-        padding: 4px;
         border-radius: 6px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: start;
-        justify-content: between;
+        justify-content: start;
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
       ">
       <div style="display: flex; align-items: center; gap: 4px;"> <div style="
           width: 10px;
@@ -93,9 +92,9 @@ const Calender = () => {
         <div style="
           display: flex;
           flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          font-size: 10px;
+          align-items: start;
+          justify-content: start;
+          font-size: 12px;
           color: ${
             bgColor === "#d1fae5"
               ? "#065f46"
